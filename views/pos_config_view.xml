@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_pos_config_kanban_inherit" model="ir.ui.view">
+            <field name="name">view.pos.config.kanban.inherit</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_config_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='last_session_closing_date']" position="after">
+                    <field name="last_session_closing_datetime"/>
+                </xpath>
+                <xpath expr="//div[@t-if='record.last_session_closing_date.value']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//div[@t-if='record.last_session_closing_date.value']" position="after">
+                    <div t-if="record.last_session_closing_datetime.value" class="row">
+                        <div class="col-6">
+                            <span>Last Closing Date</span>
+                        </div>
+                        <div class="col-6">
+                            <span><t t-esc="record.last_session_closing_datetime.value"/></span>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
